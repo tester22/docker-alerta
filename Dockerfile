@@ -52,8 +52,8 @@ COPY mongod.conf /app/mongod.conf
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stdout /var/log/nginx/error.log
-RUN chgrp -R 0 /app /venv /web && \
-    chmod -R g=u /app /venv /web && \
+RUN chgrp -R 0 /app /venv /web /opt/lib && \
+    chmod -R g=u /app /venv /web /opt/lib && \
     useradd -u 1001 -g 0 alerta
 
 USER 1001
