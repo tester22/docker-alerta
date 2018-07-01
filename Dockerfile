@@ -18,8 +18,8 @@ VOLUME /opt
 
 # MongoDB defaults… these should not need changing.
 ENV MONGODB_DATA=/opt/lib/mongodb
-ENV MONGODB_USER=mongodb
-ENV MONGODB_GROUP=mongodb
+ENV MONGODB_USER=root
+ENV MONGODB_GROUP=root
 
 
 RUN apt-get update && apt-get install -y \
