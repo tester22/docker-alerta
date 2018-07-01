@@ -3,13 +3,7 @@ set -x
 
 RUN_ONCE=/app/.run_once
 
-# ---------------------------------------------------------------------------
-# MongoDB configuration / preparation
-# ---------------------------------------------------------------------------
-# Make sure MongoDB directory exists.
-mdkir /var/local
-mkdir "${MONGODB_DATA}"
-chown "${MONGODB_USER}:${MONGODB_GROUP}" "${MONGODB_DATA}"
+
 
 # Generate web console config, if not supplied
 if [ ! -f "${ALERTA_WEB_CONF_FILE}" ]; then
