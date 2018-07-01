@@ -14,12 +14,12 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.version=$VERSION \
       org.label-schema.schema-version="1.0.0-rc.1"
 
-VOLUME /opt
+VOLUME /var/local
 
 # MongoDB defaults… these should not need changing.
-ENV MONGODB_DATA=/opt/lib/mongodb
-ENV MONGODB_USER=root
-ENV MONGODB_GROUP=root
+ENV MONGODB_DATA=/var/local/mongo
+ENV MONGODB_USER=mongodb
+ENV MONGODB_GROUP=mongodb
 
 
 RUN apt-get update && apt-get install -y \
