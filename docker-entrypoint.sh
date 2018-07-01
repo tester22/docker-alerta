@@ -3,6 +3,15 @@ set -x
 
 RUN_ONCE=/app/.run_once
 
+# ---------------------------------------------------------------------------
+# MongoDB configuration / preparation
+# ---------------------------------------------------------------------------
+# Make sure MongoDB directory exists.
+if [ ! -d "${MONGODB_DATA}" ]; then
+    mkdir "${MONGODB_DATA}" || exit $?
+    chown "${MONGODB_USER}:${MONGODB_GROUP}" "${MONGODB_DATA}" || exit $?
+fi
+
 # Generate web console config, if not supplied
 if [ ! -f "${ALERTA_WEB_CONF_FILE}" ]; then
   cat >"${ALERTA_WEB_CONF_FILE}" << EOF
