@@ -1,7 +1,7 @@
 FROM python:3
 ENV PYTHONUNBUFFERED 1
 
-LABEL maintainer="Nick Satterly <nick.satterly@gmail.com>"
+LABEL maintainer="Anton Delitsch <anton@trugen.net>"
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -9,7 +9,7 @@ ARG VERSION
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.url="http://alerta.io" \
-      org.label-schema.vcs-url="https://github.com/alerta/docker-alerta" \
+      org.label-schema.vcs-url="https://github.com/tester22/docker-alerta" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.version=$VERSION \
       org.label-schema.schema-version="1.0.0-rc.1"
@@ -24,14 +24,15 @@ RUN apt-get update && apt-get install -y \
     postgresql-client-common \
     python3-dev \
     supervisor \
-    wget
+    wget \
+    mongodb
 
 RUN pip install --no-cache-dir virtualenv && \
     virtualenv --python=python3 /venv && \
     /venv/bin/pip install uwsgi alerta alerta-server==$VERSION
 ENV PATH $PATH:/venv/bin
 
-ADD https://github.com/alerta/angular-alerta-webui/archive/master.tar.gz /tmp/web.tar.gz
+ADD https://github.com/tester22/angular-alerta-webui/archive/master.tar.gz /tmp/web.tar.gz
 RUN tar zxvf /tmp/web.tar.gz -C /tmp && \
     mv /tmp/angular-alerta-webui-master/app /web && \
     mv /web/config.js /web/config.js.orig
