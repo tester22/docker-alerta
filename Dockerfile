@@ -36,7 +36,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip install --no-cache-dir virtualenv && \
     virtualenv --python=python3 /venv && \
-    /venv/bin/pip install uwsgi alerta alerta-server==$VERSION
+    /venv/bin/pip install uwsgi alerta git+https://github.com/tester22/alerta.git
+    #alerta-server==$VERSION
 ENV PATH $PATH:/venv/bin
 
 ADD https://github.com/tester22/angular-alerta-webui/archive/master.tar.gz /tmp/web.tar.gz
