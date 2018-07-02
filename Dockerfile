@@ -64,10 +64,11 @@ ENV BASE_URL /api
 ENV PROVIDER basic
 ENV INSTALL_PLUGINS ""
 
-EXPOSE 8080
+EXPOSE 80
+EXPOSE 9001
 
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 COPY supervisord.conf /app/supervisord.conf
-CMD ["supervisord", "-c", "/app/supervisord.conf"]
+CMD ["supervisord", "-c", "/opt/supervisord.conf"]
