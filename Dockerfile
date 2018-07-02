@@ -32,8 +32,7 @@ RUN apt-get update && apt-get install -y \
     postgresql-client-common \
     python3-dev \
     supervisor \
-    wget \
-    mongodb
+    wget
 
 RUN pip install --no-cache-dir virtualenv && \
     virtualenv --python=python3 /venv && \
@@ -48,12 +47,11 @@ RUN tar zxvf /tmp/web.tar.gz -C /tmp && \
 COPY wsgi.py /app/wsgi.py
 COPY uwsgi.ini /app/uwsgi.ini
 COPY nginx.conf /app/nginx.conf
-COPY mongod.conf /app/mongod.conf
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stdout /var/log/nginx/error.log
-RUN chgrp -R 0 /app /venv /web /opt && \
-    chmod -R g=u /app /venv /web /opt && \
+RUN chgrp -R 0 /app /venv /web && \
+    chmod -R g=u /app /venv /web && \
     useradd -u 1001 -g 0 alerta
 
 USER 1001
