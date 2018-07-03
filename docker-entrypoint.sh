@@ -48,7 +48,7 @@ if [ ! -f "${RUN_ONCE}" ]; then
 
   # Generate alerta CLI config
   API_KEY=${ADMIN_KEY:-$(alertad keys 2>/dev/null | head -1 | cut -d" " -f1)}
-  if [ -n "${API_KEY}" ]; then
+  if [ -n "${API_KEY}" ] && [ ! -f "${ALERTA_CONF_FILE}" ]; then
     cat >${ALERTA_CONF_FILE} << EOF
 [DEFAULT]
 endpoint = http://localhost:8080${BASE_URL}
