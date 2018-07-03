@@ -68,6 +68,14 @@ EOF
     echo "Installing plugin '${plugin}'"
     /venv/bin/pip install git+https://github.com/alerta/alerta-contrib.git#subdirectory=plugins/$plugin
   done
+  # Install Integrations
+  IFS=","
+  for integration in ${INSTALL_INTEGRATIONS}
+  do
+    echo "Installing integration '${integration}'"
+    /venv/bin/pip install git+https://github.com/alerta/alerta-contrib.git#subdirectory=integrations/$integration
+  done
+
   touch ${RUN_ONCE}
 fi
 

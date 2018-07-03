@@ -64,9 +64,9 @@ ENV ALERTA_WEB_CONF_FILE /web/config.js
 ENV BASE_URL /api
 ENV PROVIDER basic
 ENV INSTALL_PLUGINS ""
+ENV INSTALL_INTEGRATIONS ""
 
 EXPOSE 8080
-EXPOSE 9001
 
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
