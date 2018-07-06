@@ -15,12 +15,12 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.schema-version="1.0.0-rc.1"
 
 VOLUME /var/local
+VOLUME /opt/
 
 # MongoDB defaults… these should not need changing.
-ENV MONGODB_DATA=/var/local/mongo
+ENV MONGODB_DATA=/opt/mongo
 ENV MONGODB_USER=mongodb
 ENV MONGODB_GROUP=mongodb
-
 
 RUN apt-get update && apt-get install -y \
     git \
@@ -32,7 +32,8 @@ RUN apt-get update && apt-get install -y \
     postgresql-client-common \
     python3-dev \
     supervisor \
-    wget
+    wget \
+    mongodb
 
 RUN pip install --no-cache-dir virtualenv && \
     virtualenv --python=python3 /venv && \
@@ -53,7 +54,8 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stdout /var/log/nginx/error.log
 RUN chgrp -R 0 /app /venv /web && \
     chmod -R g=u /app /venv /web && \
-    useradd -u 1001 -g 0 alerta
+    useradd -u 1001 -g 0 alerta && \
+    useradd -u 1001 -g 0 mongodb
 
 USER 1001
 
