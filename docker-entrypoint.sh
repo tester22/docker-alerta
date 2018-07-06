@@ -3,8 +3,7 @@ set -x
 
 RUN_ONCE=/app/.run_once
 
-mkdir -p /mongodata
-mount -t vboxsf -o defaults,uid=id -u docker,gid=id -g docker /opt/ /mongodata
+
 
 # Generate web console config, if not supplied
 if [ ! -f "${ALERTA_WEB_CONF_FILE}" ]; then

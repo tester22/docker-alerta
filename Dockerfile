@@ -15,12 +15,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.schema-version="1.0.0-rc.1"
 
 VOLUME /var/local
-VOLUME /opt/
 
-# MongoDB defaults… these should not need changing.
-ENV MONGODB_DATA=/mongodata/mongo
-ENV MONGODB_USER=mongodb
-ENV MONGODB_GROUP=mongodb
 
 RUN apt-get update && apt-get install -y \
     git \
@@ -33,12 +28,11 @@ RUN apt-get update && apt-get install -y \
     python3-dev \
     supervisor \
     wget \
-    mongodb \
     cron
 
 RUN pip install --no-cache-dir virtualenv && \
     virtualenv --python=python3 /venv && \
-    /venv/bin/pip install uwsgi alerta letsencrypt git+https://github.com/tester22/alerta.git
+    /venv/bin/pip install uwsgi alerta alerta-server
     #alerta-server==$VERSION
 ENV PATH $PATH:/venv/bin
 
@@ -55,9 +49,9 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stdout /var/log/nginx/error.log
 RUN chgrp -R 0 /app /venv /web && \
     chmod -R g=u /app /venv /web && \
-    useradd -u 1001 -g 0 alerta && \
-    usermod -u 1002 -g 0 mongodb
+    useradd -u 1001 -g 0 alerta
 
+USER 1001
 
 ENV ALERTA_SVR_CONF_FILE /app/alertad.conf
 ENV ALERTA_CONF_FILE /app/alerta.conf
