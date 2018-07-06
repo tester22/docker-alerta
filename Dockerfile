@@ -58,7 +58,6 @@ RUN chgrp -R 0 /app /venv /web && \
     useradd -u 1001 -g 0 alerta && \
     usermod -u 1002 -g 0 mongodb
 
-USER 1001
 
 ENV ALERTA_SVR_CONF_FILE /app/alertad.conf
 ENV ALERTA_CONF_FILE /app/alerta.conf
