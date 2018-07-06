@@ -18,7 +18,7 @@ VOLUME /var/local
 VOLUME /opt/
 
 # MongoDB defaults… these should not need changing.
-ENV MONGODB_DATA=/opt/mongo
+ENV MONGODB_DATA=/mongodata/mongo
 ENV MONGODB_USER=mongodb
 ENV MONGODB_GROUP=mongodb
 
@@ -38,7 +38,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip install --no-cache-dir virtualenv && \
     virtualenv --python=python3 /venv && \
-    /venv/bin/pip install uwsgi alerta git+https://github.com/tester22/alerta.git
+    /venv/bin/pip install uwsgi alerta letsencrypt git+https://github.com/tester22/alerta.git
     #alerta-server==$VERSION
 ENV PATH $PATH:/venv/bin
 
