@@ -33,7 +33,8 @@ RUN apt-get update && apt-get install -y \
     python3-dev \
     supervisor \
     wget \
-    mongodb
+    mongodb \
+    cron
 
 RUN pip install --no-cache-dir virtualenv && \
     virtualenv --python=python3 /venv && \
@@ -55,7 +56,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/error.log
 RUN chgrp -R 0 /app /venv /web && \
     chmod -R g=u /app /venv /web && \
     useradd -u 1001 -g 0 alerta && \
-    usermod -u 1001 -g 0 mongodb
+    usermod -u 1002 -g 0 mongodb
 
 USER 1001
 
