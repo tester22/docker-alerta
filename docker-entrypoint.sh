@@ -79,6 +79,8 @@ EOF
     /venv/bin/pip install git+https://github.com/alerta/alerta-contrib.git#subdirectory=integrations/$integration
   done
 
+  pip install git+https://github.com/tester22/alerta-contrib.git@mailgun-webhook#subdirectory=webhooks/mailgun
+  pip install git+https://github.com/tester22/alerta-contrib.git@azure-monitor#subdirectory=webhooks/azuremonitor
   touch ${RUN_ONCE}
 fi
 
