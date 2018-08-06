@@ -79,8 +79,15 @@ EOF
     /venv/bin/pip install git+https://github.com/alerta/alerta-contrib.git#subdirectory=integrations/$integration
   done
 
-  pip install git+https://github.com/tester22/alerta-contrib.git@mailgun-webhook#subdirectory=webhooks/mailgun
-  pip install git+https://github.com/tester22/alerta-contrib.git@azure-monitor#subdirectory=webhooks/azuremonitor
+  # Install Webhooks
+  IFS=","
+  for webhook in ${INSTALL_WEBHOOKS}
+  do
+    echo "Installing webhook '${webhook}'"
+    /venv/bin/pip install git+https://github.com/alerta/alerta-contrib.git#subdirectory=webhooks/$webhook
+  done
+
+  
   touch ${RUN_ONCE}
 fi
 
